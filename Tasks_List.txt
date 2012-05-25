@@ -1,0 +1,4 @@
+1. Simple pyGame window for test and debugging purposes. -- DONE
+2. Integration with pyOpenGL. -- DONE
+3. Basic Node class to hold a game node. -- PROPERAT
+4. Loader for .obj files. -- BorisVelichkov
