@@ -24,6 +24,9 @@ class vector(ndarray):
     
     def __repr__(self):
         return ""+str(self[0])+" "+str(self[1])+" "+str(self[2])+" "+str(self[3])
+        
+    def __str__(self):
+        return ""+str(self[0])+" "+str(self[1])+" "+str(self[2])+" "+str(self[3])
     
     def dot(self, other):
         return self[0]*other[0] + self[1]*other[1] + self[2]*other[2]
