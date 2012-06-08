@@ -1,5 +1,6 @@
 from numpy import *
 from Vector import *
+from Utility_functions import *
 
 class Node():
     def __init__(self, node_ID):
@@ -8,15 +9,15 @@ class Node():
         self.ID = node_ID
         self.name = ''
         self.bounding_box = None
-        self.transformed_bounding_box = matrix(None, None, None)
-        self.absolute_transformation = matrix(None, None, None)
-        self.relative_transformation = matrix(None, None, None)
+        self.transformed_bounding_box = None
+        self.absolute_transformation = get_identity_matrix()
+        self.relative_transformation = get_identity_matrix()
         self.visible = False
-        self.child = None
-        self.scale = vector()
-        self.rotation = vector()
-        self.translation = vector()
-        self.absolute_position = matrix(None, None, None)
+        self.children = []
+        self.scale = get_zero_vector()
+        self.rotation = get_zero_vector()
+        self.translation = get_zero_vector()
+        self.absolute_position = get_identity_matrix()
         self.parent = None
         self.debug_info_visible = False
         
