@@ -1,4 +1,5 @@
-import numpy, vector
+from numpy import *
+from Vector.py import *
 
 class Node:
     def __init__(self, node_ID):
