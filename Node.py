@@ -1,6 +1,4 @@
-import pygame, sys
-from OpenGL.GL import *
-from OpenGL.GLU import *
+import numpy, vector
 
 class Node:
     def __init__(self, node_ID):
