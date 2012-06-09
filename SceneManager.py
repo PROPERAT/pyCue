@@ -1,12 +1,16 @@
+from Node import *
+
 class SceneManagerError(Exception):
     def __init__(self, value):
         self.value = value
     def __str__(self):
         return repr(self.value)
 
-class ScneManager:
+class SceneManager:
     def __init__(self):
-        self.root_node = Node()
+        self.root_node = Node(1)
+        self.root_node.set_name("scene_root")
+        self.node_enumerator = 1
         self.active_camera = -1
         self.camera_lsit = []
         self.render_lsit = []
@@ -15,7 +19,7 @@ class ScneManager:
         if parent == 0:
             self.root_node.add_child(node)
         else:
-            if self.get_node_form_ID(parent.get_ID()) is None:
+            if self.get_node_from_ID(parent.get_ID()) is None:
                 raise SceneManagerError("Could not add node with parent who is not in the scene !")
             else:
                 parent.add_child(node)
@@ -63,4 +67,5 @@ class ScneManager:
         render_list.append(node)
     
     def create_node(self):
-        return Node()
+        self.node_enumerator += 1
+        return Node(self.node_enumerator)
