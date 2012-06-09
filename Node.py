@@ -74,7 +74,7 @@ class Node():
     def add_child(self, node):
         pass
 
-    def get_children(self)
+    def get_children(self):
         self.children
     
     #removes a child node
