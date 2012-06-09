@@ -37,7 +37,7 @@ class SceneManager:
         else:
             children_list = start.get_children()
             for child in children_list:
-                get_node_fromID(self, id, start)
+                get_node_fromID(self, id, child)
     
     def get_node_from_name(self, name, start=0):
         if start == 0:
@@ -49,7 +49,7 @@ class SceneManager:
         else:
             children_list = start.get_children()
             for child in children_list:
-                get_node_fromID(self, name, start)
+                get_node_fromID(self, name, child)
     
     def remove_all(self):
         self.root_node.remove_all()
