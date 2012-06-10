@@ -129,7 +129,7 @@ class Node():
     
     #returns the parent node
     def get_parent(self):
-        return parent
+        return self.parent
     
     #sets debug flag
     def set_debug_info_visible(self, bool):
