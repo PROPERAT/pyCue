@@ -61,7 +61,7 @@ class NodeTest(unittest.TestCase):
         
         child.set_parent(parent)
         
-        self.assertEquals(child.get_parent(), parent)
+        self.assertEqual(child.get_parent(), parent)
         self.assertIn(child, parent.get_children())
         
     def test_visibility_flag(self):
