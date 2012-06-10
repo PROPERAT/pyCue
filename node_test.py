@@ -12,6 +12,51 @@ class NodeTest(unittest.TestCase):
         self.assertEqual('', node.get_name())
         node.set_name('new_name')
         self.assertEqual('new_name', node.get_name())
-
+    
+    def test_add_children(self):    
+        node1 = Node(10)
+        node2 = Node(11)
+        to_test = Node(1)
+        
+        to_test.add_child(node1)
+        to_test.add_child(node2)
+        
+        self.assertEqual(len(to_test.get_children()), 2)
+        
+        self.assertEqual(node1.get_parent(), to_test)
+        self.assertEqual(node2.get_parent(), to_test)
+    
+    def test_remove_all_children(self):    
+        node1 = Node(10)
+        node2 = Node(11)
+        to_test = Node(1)
+        
+        to_test.add_child(node1)
+        to_test.add_child(node2)
+        
+        to_test.remove_all_children()
+        
+        self.assertEqual(len(to_test.get_children()), 0)
+        
+    def test_remove_child(self):    
+        node1 = Node(10)
+        node2 = Node(11)
+        to_test = Node(1)
+        
+        to_test.add_child(node1)
+        to_test.add_child(node2)
+        
+        to_test.remove_child(node1)
+        
+        self.assertNotIn(node1, to_test.get_children())
+        
+    def test_set_parent(self):
+        parent = Node(1)
+        child =  Node(2)
+        
+        child.set_parent(parent)
+        
+        self.assertEquals(child.get_parent(), parent)
+        self.assertIn(child, parent.get_children())
 if __name__ == '__main__':
     unittest.main()
