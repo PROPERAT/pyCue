@@ -38,6 +38,9 @@ class NodeTest(unittest.TestCase):
         
         self.assertEqual(len(to_test.get_children()), 0)
         
+        self.assertIs(node1.get_parent(), None)
+        self.assertIs(node2.get_parent(), None)
+        
     def test_remove_child(self):    
         node1 = Node(10)
         node2 = Node(11)
@@ -50,6 +53,8 @@ class NodeTest(unittest.TestCase):
         
         self.assertNotIn(node1, to_test.get_children())
         
+        self.assertIs(node1.get_parent(), None)
+        
     def test_set_parent(self):
         parent = Node(1)
         child =  Node(2)
@@ -58,5 +63,17 @@ class NodeTest(unittest.TestCase):
         
         self.assertEquals(child.get_parent(), parent)
         self.assertIn(child, parent.get_children())
+        
+    def test_visibility_flag(self):
+        node = Node(1)
+        node.set_visible(True)
+        
+        self.assertTrue(node.is_visible())
+        
+        node.set_visible(False)
+        
+        self.assertFalse(node.is_visible())
+
+
 if __name__ == '__main__':
     unittest.main()
