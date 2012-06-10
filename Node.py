@@ -56,7 +56,7 @@ class Node():
     
     #returns true if node is visible
     def is_visible(self):
-        pass
+        return self.visible
     
     #sets visibility
     def set_visible(self, bool):
@@ -80,10 +80,13 @@ class Node():
     
     #removes a child node
     def remove_child(self, node):
+        node.parent = None
         self.children.remove(node)
     
     #removes all children
     def remove_all_children(self):
+        for child in self.children:
+            child.parent = None
         self.children = []
     
     #removes this node if attached to any other
