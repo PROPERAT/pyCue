@@ -18,13 +18,11 @@ class SceneManager:
     def add_scene_node(self, node, parent=0):
         if parent == 0:
             self.root_node.add_child(node)
-            node.set_parent(self.root_node)
         else:
             if self.get_node_from_ID(parent.get_ID()) is None:
                 raise SceneManagerError("Could not add node with parent who is not in the scene !")
             else:
                 parent.add_child(node)
-                node.set_parent(self.root_node)
     
     def get_root_node(self):
         return self.root_node
