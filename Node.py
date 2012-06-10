@@ -73,17 +73,18 @@ class Node():
     #adds a child node to the current node
     def add_child(self, node):
         self.children.append(node)
+        node.parent = self
 
     def get_children(self):
         return self.children
     
     #removes a child node
     def remove_child(self, node):
-        pass
+        self.children.remove(node)
     
     #removes all children
     def remove_all_children(self):
-        pass
+        self.children = []
     
     #removes this node if attached to any other
     def remove(self):
@@ -120,6 +121,7 @@ class Node():
     #sets parent node
     def set_parent(self, node):
         self.parent = node
+        node.add_child(self)
     
     #recalculates absolute position
     def update_absolute_position(self):
