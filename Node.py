@@ -72,10 +72,10 @@ class Node():
     
     #adds a child node to the current node
     def add_child(self, node):
-        pass
+        self.children.append(node)
 
     def get_children(self):
-        self.children
+        return self.children
     
     #removes a child node
     def remove_child(self, node):
