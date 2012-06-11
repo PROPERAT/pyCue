@@ -20,6 +20,7 @@ class Node():
         self.absolute_position = get_identity_matrix()
         self.parent = None
         self.debug_info_visible = False
+        self.mesh = None
         
 
     #function called when node is registered in SceneNodeManager
@@ -142,5 +143,9 @@ class Node():
     def is_debug_info_visible(self):
         return self.debug_info_visible
     
-    
+    def set_mesh(self, mesh):
+        self.mesh = mesh
+        
+    def get_mesh(self):
+        return self.mesh
     
