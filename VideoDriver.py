@@ -22,10 +22,6 @@ class OpenGLDriver:
     def prepare_opengl(self):
         glClearColor(0,0,0,0)
         glClearDepth(1.0)
-        glMatrixMode(GL_PROJECTION)
-        gluPerspective(45, self.windowSizeX/self.windowSizeY, 1, 100)
-        glMatrixMode(GL_MODELVIEW)
-        glLoadIdentity()
         glEnable(GL_DEPTH_TEST)
         glDepthFunc(GL_LEQUAL)
     
@@ -47,8 +43,8 @@ class OpenGLDriver:
     def render_node(self, node):
         #Prepare matrices
         #temp = node.get_absolute_transformation()
-        #glMatrixMode(GL_MODELVIEW)
-        #glLoadMatrixf(self.lookat_matrix.flatten('F').tolist()[0])
+        glMatrixMode(GL_MODELVIEW)
+        glLoadMatrixf(self.lookat_matrix.flatten('F').tolist()[0])
         #glMultMatrixf(node.get_absolute_transformation().flatten('F').tolist()[0])
         
         #setup material

@@ -4,6 +4,7 @@ from OpenGL.GLU import *
 from VideoDriver import *
 from Node import *
 from TestCubeMesh import *
+from Camera import *
 class GameEvent:
     def __init__(self, code):
         self.code = code
@@ -85,20 +86,20 @@ n = Node(10)
 n.set_mesh(TestCubeMesh())
 d = OpenGLDriver()
 d.start_video()
-eye_pos = (15,10,10)
-
+eye_pos = vector([25.0,10.0,-10.0,1.0])
+c = Camera()
+c.set_eye(eye_pos)
+c.set_reference(vector([0,0,0,1]))
 def process_system_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             sys.exit()
 while(1):
     process_system_events()
-    glMatrixMode(GL_MODELVIEW)
-    glLoadIdentity()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
     glEnable(GL_CULL_FACE)
     glColor4f(1,1,1,1)
-    gluLookAt(eye_pos[0],eye_pos[1],eye_pos[2], 0,0,0, 0,1,0)
+    d.render_camera(c, 0)
     d.render_node(n)
     pygame.display.flip()
