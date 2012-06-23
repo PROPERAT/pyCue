@@ -49,11 +49,14 @@ class Node():
     
     #returns the absolute transformation in matrix form
     def get_absolute_transformation(self):
-        pass
+        if self.parent != None:
+            return parent.get_absolute_transformation()*self.get_relative_transformation()
+        else:
+            return self.get_relative_transformation()
     
     #returns relative transformation in matrix form
     def get_relative_transformation(self):
-        pass
+        return self.relative_transformation
     
     #returns true if node is visible
     def is_visible(self):
@@ -101,6 +104,7 @@ class Node():
     #sets scale factor of node as vector
     def set_scale(self, vector):
         self.scale = vector
+        self.relative_transformation = self.relative_transformation * scale_matrix(vector)
     
     #returns rotation of node as vector of x,y,z degrees rotations
     def get_rotation(self):
@@ -109,6 +113,7 @@ class Node():
     #sets rotation of node as vector of x,y,z degrees rotations
     def set_rotation(self, vector):
         self.rotation = vector
+        self.relative_transformation = self.relative_transformation * rotation_matrix(vector)
     
     #sets translation of node as vector of x,y,z
     def set_translation(self, vector):

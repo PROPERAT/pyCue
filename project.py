@@ -84,21 +84,40 @@ class PygameWindow:
 
 n = Node(10)
 n.set_mesh(TestCubeMesh())
+n.set_scale(vector([5,5,5,1]))
+n.set_rotation(vector([0,0,90,1]))
 d = OpenGLDriver()
 d.start_video()
-eye_pos = vector([25.0,10.0,-10.0,1.0])
+eye_pos = vector([10.0,0.0,-10.0,1.0])
 c = Camera()
 c.set_eye(eye_pos)
 c.set_reference(vector([0,0,0,1]))
+alpha = 0.1
+
+from PIL import Image
+img = Image.open('./ball_8.jpg') # .jpg, .bmp, etc. also work
+img_data = array(list(img.getdata()), int8)
+
+texture = glGenTextures(1)
+glPixelStorei(GL_UNPACK_ALIGNMENT,1)
+glBindTexture(GL_TEXTURE_2D, texture)
+glEnable(GL_TEXTURE_2D)
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.size[0], img.size[1], 0, GL_RGB, GL_UNSIGNED_BYTE, img_data)
+
 def process_system_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             sys.exit()
+        if event.type == pygame.KEYUP:
+            c.set_eye(vector([c.get_eye().x*cos(alpha)-c.get_eye().z*sin(alpha),c.get_eye().y, c.get_eye().x*sin(alpha)+c.get_eye().z*cos(alpha),1]))
+            pass
 while(1):
     process_system_events()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
-    glEnable(GL_CULL_FACE)
     glColor4f(1,1,1,1)
     d.render_camera(c, 0)
     d.render_node(n)
